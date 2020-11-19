@@ -1,0 +1,76 @@
+package ${package}.${moduleName}.controller;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+
+import ${package}.${moduleName}.model.${className};
+import ${package}.${moduleName}.service.I${className}Service;
+import ${package}.common.model.PageResult;
+import ${package}.common.model.Result;
+import ${package}.common.response.*;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Api(tags = "${comments}")
+@Slf4j
+@RestController
+@RequestMapping("/${pathName}")
+public class ${className}Controller {
+    @Autowired
+    private I${className}Service ${classname}Service;
+
+    /**
+     * 分页列表
+     */
+    @ApiOperation(value = "分页列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "分页起始位置", required = true),
+            @ApiImplicitParam(name = "limit", value = "分页结束位置", required = true)
+    })
+    @GetMapping
+    public ResponseMsg page(@RequestParam Map<String, Object> params) {
+            PageResult<${className}> pageResult = ${classname}Service.findList(params);
+            return PageResponseMsg.succeed(pageResult.getData(), pageResult.getCount());
+    }
+
+    /**
+     * 查询
+     */
+    @ApiOperation(value = "查询")
+    @GetMapping("/{${pk.attrname}}")
+    public ResponseMsg findById(@PathVariable Long ${pk.attrname}) {
+        ${className} model = ${classname}Service.getById(${pk.attrname});
+        return ResponseDataMsg.succeed("查询成功", model);
+    }
+
+    /**
+     * 新增or更新
+     */
+    @ApiOperation(value = "保存")
+    @PostMapping
+    public ResponseMsg save(@RequestBody ${className} ${classname}) {
+            ${classname}Service.saveOrUpdate(${classname});
+        return ResponseMsg.succeed("保存成功");
+    }
+
+    /**
+     * 删除
+     */
+    @ApiOperation(value = "删除")
+    @DeleteMapping("/{id}")
+    public ResponseMsg delete(@PathVariable Long ${pk.attrname}) {
+            ${classname}Service.removeById(${pk.attrname});
+        return ResponseMsg.succeed("删除成功");
+    }
+}

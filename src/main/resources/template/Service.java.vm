@@ -1,0 +1,23 @@
+package ${package}.${moduleName}.service;
+
+import ${package}.${moduleName}.model.${className};
+import ${package}..common.model.PageResult;
+import ${package}.${moduleName}.service.ISuperPlusService;
+
+import java.util.Map;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface I${className}Service extends ISuperPlusService<${className}> {
+    /**
+     * 列表
+     * @param params
+     * @return
+     */
+    PageResult<${className}> findList(Map<String, Object> params);
+}
+

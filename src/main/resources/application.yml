@@ -1,0 +1,25 @@
+server:
+  port: 52013
+
+spring:
+  application:
+    name: mybatis-plus-generator
+  datasource:
+    url: jdbc:mysql://数据库IP地址:数据库端口/taodong-goods?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+    username: 数据库用户名
+    password: 数据库密码
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: cn.com.ylw.generator.model
+
+swagger:
+  title: MyBatisPlus逆向生成工具
+  description: MyBatisPlus逆向生成mapper、model、service、controller
+  base-package: cn.com.ylw.generator
+  version: 1.0.0
+  contact:
+    name: 阿甘兄（agun）
+    url: https://yanglinwei.blog.csdn.net/
